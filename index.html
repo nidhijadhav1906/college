@@ -1,49 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Flexbox Layout</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The One With All The Friends</title>
+    <!-- Import "Friends" style handwritten font -->
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom "Friends" Colors */
+        :root {
+            --monica-purple: #927BD4;
+            --frame-yellow: #F4D75E;
+            --central-perk-orange: #CE421D;
+            --joey-pizza-red: #D32F2F;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fcfcfc;
+        }
+
+        .friends-font {
+            font-family: 'Gloria Hallelujah', cursive;
+        }
+
+        /* The Iconic Peephole Frame Effect */
+        .frame-border {
+            border: 8px solid var(--frame-yellow);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Polaroid Hover Effect */
+        .polaroid {
+            background: white;
+            padding: 15px 15px 50px 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: rotate(-2deg);
+        }
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.25);
+            z-index: 10;
+        }
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        .polaroid:nth-child(even):hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .dot-separator::before {
+            content: "•";
+            color: var(--central-perk-orange);
+            margin: 0 10px;
+        }
+        .dot-separator-blue::before {
+            content: "•";
+            color: #4285F4;
+            margin: 0 10px;
+        }
+        .dot-separator-red::before {
+            content: "•";
+            color: #DB4437;
+            margin: 0 10px;
+        }
+
+        /* Modal Animation */
+        .modal {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <h1 class="logo">MySite</h1>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-[#2d2d2d] text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl friends-font tracking-widest">
+                <span class="text-red-500">F</span>
+                <span class="text-blue-400">R</span>
+                <span class="text-yellow-400">I</span>
+                <span class="text-red-500">E</span>
+                <span class="text-yellow-400">N</span>
+                <span class="text-blue-400">D</span>
+                <span class="text-red-500">S</span>
+            </div>
+            <ul class="hidden md:flex space-x-8 font-semibold">
+                <li class="hover:text-[#F4D75E] cursor-pointer transition">Central Perk</li>
+                <li class="hover:text-[#F4D75E] cursor-pointer transition">Apartment 20</li>
+                <li class="hover:text-[#F4D75E] cursor-pointer transition">Episodes</li>
+                <li class="hover:text-[#F4D75E] cursor-pointer transition">Quiz</li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl focus:outline-none">☰</button>
+        </div>
+    </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Welcome to My Website</h2>
-    <p>Clean layout using Flexbox</p>
-    <button>Get Started</button>
-  </section>
+    <!-- Hero Section -->
+    <header class="relative bg-[#927BD4] text-white py-20 px-4 overflow-hidden">
+        <!-- Background Decor: The Frame -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none">
+            <div class="w-96 h-96 border-[20px] border-[#F4D75E] rounded-[50%]"></div>
+        </div>
 
-  <!-- Cards Section -->
-  <section class="cards">
-    <div class="card">
-      <h3>Card One</h3>
-      <p>Some description here.</p>
+        <div class="relative container mx-auto text-center z-10">
+            <h1 class="text-4xl md:text-6xl friends-font mb-4 drop-shadow-md">The One With All The Characters</h1>
+            <p class="text-xl md:text-2xl font-light mb-8 max-w-2xl mx-auto">
+                "Welcome to the real world. It sucks. You're gonna love it."
+            </p>
+            <button class="bg-[#F4D75E] text-[#2d2d2d] px-8 py-3 rounded-full font-bold text-lg hover:bg-yellow-300 transition shadow-lg transform hover:-translate-y-1">
+                Explore the Gang
+            </button>
+        </div>
+    </header>
+
+    <!-- Characters Grid -->
+    <section class="py-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+                <!-- RACHEL GREEN -->
+                <div class="polaroid cursor-pointer group" onclick="openModal('rachel')">
+                    <div class="overflow-hidden h-64 mb-4 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1512413914633-b5043f4041ea?auto=format&fit=crop&q=80&w=800" alt="Rachel Green" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <h3 class="text-center friends-font text-2xl text-gray-800">Rachel Green</h3>
+                    <p class="text-center text-sm text-gray-500 mt-2 font-handwriting">"Just a waitress?"</p>
+                </div>
+
+                <!-- MONICA GELLER -->
+                <div class="polaroid cursor-pointer group" onclick="openModal('monica')">
+                    <div class="overflow-hidden h-64 mb-4 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=800" alt="Monica Geller" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <h3 class="text-center friends-font text-2xl text-gray-800">Monica Geller</h3>
+                    <p class="text-center text-sm text-gray-500 mt-2">"I know!"</p>
+                </div>
+
+                <!-- PHOEBE BUFFAY -->
+                <div class="polaroid cursor-pointer group" onclick="openModal('phoebe')">
+                    <div class="overflow-hidden h-64 mb-4 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=800" alt="Phoebe Buffay" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <h3 class="text-center friends-font text-2xl text-gray-800">Phoebe Buffay</h3>
+                    <p class="text-center text-sm text-gray-500 mt-2">"Regina Phalange"</p>
+                </div>
+
+                <!-- JOEY TRIBBIANI -->
+                <div class="polaroid cursor-pointer group" onclick="openModal('joey')">
+                    <div class="overflow-hidden h-64 mb-4 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800" alt="Joey Tribbiani" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <h3 class="text-center friends-font text-2xl text-gray-800">Joey Tribbiani</h3>
+                    <p class="text-center text-sm text-gray-500 mt-2">"How you doin'?"</p>
+                </div>
+
+                <!-- CHANDLER BING -->
+                <div class="polaroid cursor-pointer group" onclick="openModal('chandler')">
+                    <div class="overflow-hidden h-64 mb-4 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800" alt="Chandler Bing" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <h3 class="text-center friends-font text-2xl text-gray-800">Chandler Bing</h3>
+                    <p class="text-center text-sm text-gray-500 mt-2">"Ms. Chanandler Bong"</p>
+                </div>
+
+                <!-- ROSS GELLER -->
+                <div class="polaroid cursor-pointer group" onclick="openModal('ross')">
+                    <div class="overflow-hidden h-64 mb-4 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1519114056088-b877fe073a5e?auto=format&fit=crop&q=80&w=800" alt="Ross Geller" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <h3 class="text-center friends-font text-2xl text-gray-800">Ross Geller</h3>
+                    <p class="text-center text-sm text-gray-500 mt-2">"We were on a break!"</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive Modal -->
+    <div id="charModal" class="modal fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-70 p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative flex flex-col md:flex-row">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-3xl font-bold z-10">&times;</button>
+            
+            <!-- Modal Image Side -->
+            <div class="md:w-1/3 h-64 md:h-auto bg-gray-100 relative">
+                <img id="modalImg" src="" alt="Character" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                    <h2 id="modalTitle" class="text-3xl text-white friends-font"></h2>
+                </div>
+            </div>
+
+            <!-- Modal Content Side -->
+            <div class="md:w-2/3 p-8">
+                <div class="mb-4">
+                    <span id="modalJob" class="inline-block bg-[#927BD4] text-white px-3 py-1 rounded-full text-xs uppercase tracking-wide font-bold mr-2"></span>
+                    <span id="modalAlias" class="inline-block bg-[#F4D75E] text-gray-800 px-3 py-1 rounded-full text-xs uppercase tracking-wide font-bold"></span>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-2 text-gray-800">The One With The Description</h3>
+                <p id="modalDesc" class="text-gray-600 leading-relaxed mb-6"></p>
+
+                <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-[#CE421D]">
+                    <h4 class="font-bold text-[#CE421D] text-sm uppercase mb-2">Iconic Traits & Trivia</h4>
+                    <ul id="modalTrivia" class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                        <!-- Filled by JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card">
-      <h3>Card Two</h3>
-      <p>Some description here.</p>
-    </div>
-    <div class="card">
-      <h3>Card Three</h3>
-      <p>Some description here.</p>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2026 MySite. All rights reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="bg-[#2d2d2d] text-gray-400 py-12 border-t-4 border-[#F4D75E]">
+        <div class="container mx-auto px-4 text-center">
+            <div class="text-3xl friends-font mb-4 text-white">Central Perk</div>
+            <div class="flex justify-center space-x-6 mb-8 text-sm uppercase tracking-widest">
+                <a href="#" class="hover:text-white transition">About</a>
+                <a href="#" class="hover:text-white transition">Cast</a>
+                <a href="#" class="hover:text-white transition">Merch</a>
+                <a href="#" class="hover:text-white transition">Contact</a>
+            </div>
+            <p class="text-xs">&copy; 2024 Friends Fan Club. Made with <span class="text-red-500">♥</span> and Unagi.</p>
+        </div>
+    </footer>
 
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Authentic Data "In Depth"
+        const characters = {
+            rachel: {
+                name: "Rachel Karen Green",
+                img: "https://images.unsplash.com/photo-1512413914633-b5043f4041ea?auto=format&fit=crop&q=80&w=800",
+                job: "Fashion Executive",
+                alias: "Rocky",
+                desc: "The character with the most significant arc, Rachel evolved from a spoiled 'Daddy's Girl' who left Barry at the altar to a powerful fashion executive at Ralph Lauren. Her relationship with Ross is the series' central emotional thread. She is known for her fashion sense, her inability to make decisions without Monica, and accidentally making a trifle with beef.",
+                trivia: [
+                    "Has a daughter named Emma with Ross.",
+                    "Her favorite movie is 'Weekend at Bernie's'.",
+                    "Once worked as a waitress at Central Perk (and was terrible at it).",
+                    "She is Ross's 'Lobster'."
+                ]
+            },
+            monica: {
+                name: "Monica E. Geller",
+                img: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=800",
+                job: "Head Chef",
+                alias: "Harmonica",
+                desc: "The glue that holds the group together. Monica is high-strung, obsessively clean, and fiercely competitive. Her apartment is the main gathering spot. Formerly overweight ('Fat Monica'), she has a complex about pleasing people (especially her parents). She finds her soulmate in Chandler Bing, transitioning from friends to husband and wife.",
+                trivia: [
+                    "Categorizes her towels into 11 sections.",
+                    "Has a secret closet full of junk.",
+                    "Married Chandler in Season 7.",
+                    "Adopted twins, Erica and Jack."
+                ]
+            },
+            phoebe: {
+                name: "Phoebe Buffay",
+                img: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=800",
+                job: "Masseuse / Musician",
+                alias: "Regina Phalange",
+                desc: "The eccentric, spiritual, and street-smart member of the group. Phoebe had a traumatic childhood (mother's suicide, father's abandonment) living on the streets, which gave her a unique moral code. She plays guitar at Central Perk, singing songs like 'Smelly Cat'. She often serves as the moral compass or the agent of chaos.",
+                trivia: [
+                    "Has an evil twin sister named Ursula.",
+                    "Served as a surrogate mother for her brother Frank Jr. (triplets).",
+                    "Believes a cat was her reincarnated mother.",
+                    "Married Mike Hannigan (Paul Rudd) in the final season."
+                ]
+            },
+            joey: {
+                name: "Joseph Francis Tribbiani Jr.",
+                img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80&w=800",
+                job: "Actor",
+                alias: "Ken Adams",
+                desc: "A lovable, simple-minded, food-loving actor. Joey is the ladies' man of the group, famous for his pickup line 'How you doin'?'. Despite his lack of book smarts, he has high emotional intelligence and is fiercely loyal to his friends. He owes Chandler a significant amount of money for rent and headshots over the years.",
+                trivia: [
+                    "Played Dr. Drake Ramoray on 'Days of Our Lives'.",
+                    "Sleeps with a stuffed penguin named Hugsy.",
+                    "DOES NOT SHARE FOOD.",
+                    "Can drink a gallon of milk in 10 seconds."
+                ]
+            },
+            chandler: {
+                name: "Chandler Muriel Bing",
+                img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800",
+                job: "Statistical Analysis",
+                alias: "Miss Chanandler Bong",
+                desc: "The king of sarcasm. Chandler uses humor as a defense mechanism stemming from his parents' divorce (his father is a drag queen in Vegas). He hates Thanksgiving and has a third nipple. His job was a mystery to the group for years ('Transponster?'). He grows from a commitment-phobe into a devoted husband to Monica.",
+                trivia: [
+                    "Middle name is Muriel.",
+                    "Lost a toe during a Thanksgiving flashback.",
+                    "Owned a Chick and a Duck.",
+                    "Briefly moved to Tulsa, Oklahoma for work."
+                ]
+            },
+            ross: {
+                name: "Dr. Ross Geller",
+                img: "https://images.unsplash.com/photo-1519114056088-b877fe073a5e?auto=format&fit=crop&q=80&w=800",
+                job: "Paleontologist",
+                alias: "The Holiday Armadillo",
+                desc: "Monica's older brother and the group's intellectual. Ross is a paleontologist with a deep love for dinosaurs. He is socially awkward and has been divorced three times (Carol, Emily, Rachel). He is prone to fits of rage over sandwiches and pivot-ing couches. His on-again-off-again romance with Rachel is the stuff of TV legend.",
+                trivia: [
+                    "Invented the concept of 'Unagi' (total awareness).",
+                    "Owns a PhD from Columbia University.",
+                    "Had a pet monkey named Marcel.",
+                    "Infamously said 'Rachel' at the altar while marrying Emily."
+                ]
+            }
+        };
+
+        function openModal(charId) {
+            const data = characters[charId];
+            const modal = document.getElementById('charModal');
+            
+            // Populate Data
+            document.getElementById('modalTitle').innerText = data.name;
+            document.getElementById('modalImg').src = data.img;
+            document.getElementById('modalJob').innerText = data.job;
+            document.getElementById('modalAlias').innerText = "AKA: " + data.alias;
+            document.getElementById('modalDesc').innerText = data.desc;
+            
+            // Populate Trivia
+            const triviaList = document.getElementById('modalTrivia');
+            triviaList.innerHTML = ''; // Clear old
+            data.trivia.forEach(item => {
+                const li = document.createElement('li');
+                li.innerText = item;
+                triviaList.appendChild(li);
+            });
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('charModal').classList.remove('active');
+        }
+
+        // Close modal if clicking outside
+        document.getElementById('charModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
