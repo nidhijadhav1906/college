@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate JS Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="quiz-header">
+            <h1>JS Quiz Master</h1>
+            <p id="progress">Question 1 of 7</p>
+        </div>
+
+        <div id="quiz">
+            <h2 id="question">Question Text</h2>
+            <div id="answer-buttons" class="btn-grid">
+                </div>
+            <div class="controls">
+                <button id="next-btn" class="next-btn hide">Next Question →</button>
+            </div>
+        </div>
+
+        <div id="result-container" class="hide">
+            <h2>Quiz Complete!</h2>
+            <div class="score-circle">
+                <span id="score-text">0</span>
+            </div>
+            <p id="feedback-text">Keep practicing!</p>
+            <button class="restart-btn" onclick="location.reload()">Try Again</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
